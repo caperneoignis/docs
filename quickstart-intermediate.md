@@ -657,7 +657,7 @@ We left a "TODO" note in our code where our delete button is supposed to be. So,
 
         <!-- Delete Button -->
         <td>
-            <form action="{{ url('/tasks/') }}{{ $task->id }}" method="POST">
+            <form action="{{ url('/tasks/') }}/{{ $task->id }}" method="POST">
                 {!! csrf_field() !!}
                 {!! method_field('DELETE') !!}
 
