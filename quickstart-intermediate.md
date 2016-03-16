@@ -269,8 +269,8 @@ Since we know we're going to need to retrieve and store tasks, let's create a `T
 Now that the controller has been generated, let's go ahead and stub out some routes in our `app/Http/routes.php` file to point to the controller:
 
     Route::get('/tasks', 'TaskController@index');
-    Route::post('/task', 'TaskController@store');
-    Route::delete('/task/{task}', 'TaskController@destroy');
+    Route::post('/tasks', 'TaskController@store');
+    Route::delete('/tasks/{task}', 'TaskController@destroy');
 
 #### Authenticating All Task Routes
 
@@ -358,7 +358,7 @@ We'll skip over some of the Bootstrap CSS boilerplate and only focus on the thin
             @include('common.errors')
 
             <!-- New Task Form -->
-            <form action="{{ url('task') }}" method="POST" class="form-horizontal">
+            <form action="{{ url('tasks') }}" method="POST" class="form-horizontal">
                 {!! csrf_field() !!}
 
                 <!-- Task Name -->
@@ -657,7 +657,7 @@ We left a "TODO" note in our code where our delete button is supposed to be. So,
 
         <!-- Delete Button -->
         <td>
-            <form action="{{ url('task/'.$task->id) }}" method="POST">
+            <form action="{{ url('/tasks/') }}{{ $task->id }}" method="POST">
                 {!! csrf_field() !!}
                 {!! method_field('DELETE') !!}
 
@@ -682,7 +682,7 @@ We can spoof a `DELETE` request by outputting the results of the `method_field('
 
 Now, we're almost ready to define the `destroy` method on our `TaskController`. But, first, let's revisit our route declaration and controller method for this route:
 
-    Route::delete('/task/{task}', 'TaskController@destroy');
+    Route::delete('/tasks/{task}', 'TaskController@destroy');
 
     /**
      * Destroy the given task.
